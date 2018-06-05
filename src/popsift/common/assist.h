@@ -80,12 +80,12 @@ float readTex( cudaTextureObject_t tex, float x, float y )
     return tex2D<float>( tex, x+0.5f, y+0.5f );
 }
 
-static size_t getCurrentThreadId()
+static std::size_t getCurrentThreadId()
 {
 #ifdef _WIN32
     return GetCurrentThreadId();
 #else
-    return pthread_self();
+    return reinterpret_cast<std::size_t>(pthread_self());
 #endif
 }
 
